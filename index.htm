@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcil Church</title>
+    <!-- Latest Bootstrap 5.3.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Favicon (Icon) -->
+    <link rel="icon" href="Assets/Icons/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="Assets/Icons/icon.png">
+    <link rel="icon" href="Assets/Icons/icon.png" sizes="32x32">
+    <link rel="icon" href="Assets/Icons/icon.png" sizes="16x16">
+
+    <style>                       
+                /* General Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Body - Light/Dark Mode */
+        body[data-theme='dark'] {
+            background-color: #121212;
+            color: #fff;
+        }
+
+        body[data-theme='dark'] .card {
+            background-color: #333;
+            border-color: #444;
+        }
+
+        body[data-theme='dark'] .button {
+            background-color: #6200ea;
+            color: white;
+        }
+
+        body[data-theme='dark'] .button:hover {
+            background-color: #3700b3;
+        }
+
+        /* Image Effects */
+        img:hover, .flip-image, .smaller-image, .services-section .card-img-top:hover, .get-together-section img:hover, .services-section .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .flip-image {
+            animation: flip 12s infinite;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .smaller-image {
+            max-height: 250px;
+            width: auto;
+            margin: 0 auto;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        /* Flip Animation */
+        @keyframes flip {
+            0%, 66% {
+                transform: scale(1);
+            }
+            33%, 100% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Hover Effects for Services and Get-Together Images */
+        .services-section .card-img-top,
+        .get-together-section img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .services-section .card-img-top:hover,
+        .get-together-section img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Hover Effects */
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Section Fade-In */
+        section {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        section.visible, .fade-in {
+            opacity: 1 !important;
+            transition: opacity 0.7s ease-in-out;
+        }
+
+        /* Location Section */
+        .location-section {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+        }
+
+        .location-section .container {
+            max-width: 1200px;
+        }
+
+        .location-section .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .location-section .col-md-6 {
+            margin-bottom: 30px;
+        }
+
+        .location-section iframe {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Flexbox and Spacing Utilities */
+        .d-flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mx-2 {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Social Media Icons */
+        .d-flex a {
+            text-decoration: none;
+        }
+
+        .bg-primary {
+            background-color: #007bff;
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        .p-2 {
+            padding: 0.5rem;
+        }
+
+        .rounded-circle {
+            border-radius: 50%;
+        }
+
+        .fa-2x {
+            font-size: 2rem;
+        }
+
+        .d-flex a:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 767px) {
+            .hero-section img {
+                max-height: 200px;
+            }
+
+            .get-together-section img {
+                width: 50%;
+            }
+
+            .services-section .card-img-top {
+                max-height: 200px;
+            }
+
+            .img-fluid {
+                max-width: 100%;
+            }
+            
+            .location-section .col-md-6 {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Pastor Section */
+        p > .lead-pastors {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pastor {
+            text-align: center;
+            max-width: 150px;
+        }
+
+        .pastor img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .pastor p {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="Assets/Icons/icon.png" alt="Marcil Church Logo" class="me-2" width="30" height="30">
+                Marcil Church
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ministries">Ministries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero-section text-center bg-primary text-white py-5">
+        <div class="container">
+            <h1 class="display-4">Welcome to Marcil Church</h1>
+            <h2><i>Gospel-driven transformation!</i></h2>
+            <!-- Hero Images with flip effect and smaller coverage -->
+            <img src="https://imgur.com/ms5sEOn.jpg" alt="Marcil Church" class="img-fluid mt-4 rounded w-100 h-auto flip-image smaller-image">
+            <img src="https://imgur.com/3iq5q7y.jpg" alt="Marcil Church" class="img-fluid mt-4 rounded w-100 h-auto flip-image smaller-image">
+            <img src="https://imgur.com/V4KcBxX.jpg" alt="Marcil Church" class="img-fluid mt-4 rounded w-100 h-auto flip-image smaller-image">
+
+            <a href="https://www.youtube.com/watch?v=tJvpsue8CHg" class="btn btn-light m-2">Powerful Preaching</a>
+            <a href="https://www.youtube.com/watch?v=zdHRLAQsxDg" class="btn btn-light m-2">Wonderful Worship</a>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">About Us</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="https://imgur.com/VWaBIxY.jpg" alt="Marcil staff" class="img-fluid rounded mb-4 w-100 h-auto">
+                </div>
+                <div class="col-md-6">
+                    <p>We are a vibrant and dynamic mega church that brings together people from all walks of life to worship,
+                        learn, and grow together in faith. Join us as we build a community of love, service, and purpose.
+                        We are committed to spreading the Word of God. Our church is a place where people can find solace, inspiration, and a place to grow spiritually.
+                    </p>
+                    <p>Lead pastors are:
+                    <div class="lead-pastors">
+                        <div class="pastor">
+                            <img src="https://imgur.com/r7uqWD2.jpg" alt="Pr. Yonatan Aklilu" class="img-fluid rounded mb-2">
+                            <p>Pr. Yonatan Aklilu</p>
+                        </div>
+                        <div class="pastor">
+                            <img src="https://imgur.com/U4xQJmc.jpg" alt="Pr. Doe Emru" class="img-fluid rounded mb-2">
+                            <p>Pr. Doe Emru</p>
+                        </div>
+                    </div>
+                    <p>"<b>I can do all things</b> which He has called me to do through Him who strengthens and empowers me [to fulfill His purpose], I am self-sufficient in Christ’s sufficiency; I am ready for anything and equal to anything through Him who infuses me with inner strength and confident peace." — Philippians 4:13 (AMP)</p>
+                </div>
+                <div class="mission">
+                    <h3>Mission</h3>
+                    <p>To spread the love of Christ, build a compassionate community, and empower individuals through faith, service, and worship.</p>
+                </div>
+                <div class="vision">
+                    <h3>Vision</h3>
+                    <p>To be a vibrant church that nurtures faith, fosters unity, and impacts the world through God's love.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ministries Section -->
+    <section id="ministries" class="ministries-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Our Ministries</h2>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="https://imgur.com/mOK7xwZ.jpg" class="card-img-top w-100 h-auto circle-image" alt="Youth Ministry">
+                        <div class="card-body">
+                            <h3>Youth Ministry</h3>
+                            <p>Empowering the next generation of leaders and believers. The project "Excellent Youth" has trained more than 100,000 Ethiopian youths.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="https://imgur.com/6SBNZTI.jpg" class="card-img-top w-100 h-auto circle-image" alt="Women's Ministry">
+                        <div class="card-body">
+                            <h3>Women's Ministry</h3>
+                            <p>Supporting women in their spiritual and personal growth.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="https://imgur.com/GK4nX2K.jpg" class="card-img-top w-100 h-auto circle-image" alt="Worship Ministry">
+                        <div class="card-body">
+                            <h3>Worship Ministry</h3>
+                            <p>Leading in worship with passion and purpose. Our worship ministry is dedicated to serving the community through acts of kindness and service.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="https://imgur.com/nSdZhe8.jpg" class="card-img-top w-100 h-auto circle-image" alt="Children's Ministry">
+                        <div class="card-body">
+                            <h3>Children's Ministry</h3>
+                            <p>Teaching the love of Christ to the youngest hearts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Additional Image Slot -->
+            <div class="row mb-5">
+                <div class="col-md-6">
+                    <img src="https://imgur.com/RbXEwWH.jpg" class="img-fluid rounded w-100 h-auto" alt="Ministries Image">
+                </div>
+                <div class="col-md-6">
+                    <img src="https://imgur.com/R6RceM5.jpg" class="img-fluid rounded w-100 h-auto" alt="Ministries Image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events-section py-5">
+        <div class="container">
+            <h2 class="text-left mb-4">Upcoming Events</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://imgur.com/YLx6ego.jpg" class="card-img-top w-100 h-auto" alt="Christmas Eve Service">
+                        <div class="card-body">
+                            <h3>Christmas Eve Service</h3>
+                            <p>Join us for a night of worship, reflection, and celebration.</p>
+                            <span class="text-muted"> January 6th, 8:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Our Services</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://imgur.com/eAe778i.jpg" class="card-img-top w-100 h-auto" alt="Sunday Worship">
+                        <div class="card-body">
+                            <h3>Sunday Service</h3>
+                            <p>Join us every Sunday at 10:00 AM for powerful worship and inspiring sermons.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="https://imgur.com/6d2zseZ.jpg" class="card-img-top w-100 h-auto" alt="Friday Bible Study">
+                        <div class="card-body">
+                            <h3>Friday Bible Study</h3>
+                            <p>We hold weekly services every Friday evening at 5:00 PM.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Recognition Section -->
+    <section id="recognition-section" class="py-5">
+        <div class="container">
+            <h2 class="recognition-title">Recognition</h2>
+            <p class="recognition-content">
+                We are deeply honored to have received recognition from the Prime Minister of Ethiopia, who graciously
+                acknowledged our dedicated service and commitment to the community during our mission.
+            </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="https://imgur.com/06eyoKA.jpg" class="recognition-img" alt="Recognition Image 1">
+                </div>
+                <div class="col-md-6">
+                    <img src="https://imgur.com/q05ZDi1.jpg" class="recognition-img" alt="Recognition Image 2">
+                </div>
+            </div>
+            <center>
+            <p class="recognition-message">
+                <article>"Thank you for your outstanding contributions to society and the uplifting work you've done for the
+                community!"</article>
+            </p>
+            </center>
+        </div>
+    </section>
+    <!-- Get Together Section -->
+    <div class="get-together-section py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Get Together Session</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-12 mb-0">
+                    <img src="https://imgur.com/EVeXLGC.jpg" class="img-fluid rounded w-25 h-auto d-inline-block" alt="Get Together Image 1">
+                    <img src="https://imgur.com/L7mh2k8.jpg" class="img-fluid rounded w-25 h-auto d-inline-block" alt="Get Together Image 2">
+                    <img src="https://imgur.com/9fIq1BW.jpg" class="img-fluid rounded w-25 h-auto d-inline-block" alt="Get Together Image 3">
+                    <img src="https://imgur.com/Idk3X2X.jpg" class="img-fluid rounded w-25 h-auto d-inline-block" alt="Get Together Image 4">
+                </div>
+            </div>
+            <p>Join us for a memorable gathering filled with fun and fellowship.</p>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <section id="bank-address" class="bank-address-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Projects</h2>
+            <h5>Current Projects</h5>
+            <p>We are currently running several projects, some of which include:</p>
+            <ul>
+                <li><strong>Marcil TV:</strong> A community media project aimed at reaching the majority of people in the community, with an estimated reach of 80% of the community. This project will bring news, entertainment, and community updates to the people.</li>
+                <li><strong>Excellent Youth Center:</strong> An ongoing construction project aimed at providing a dedicated space for young people in the community. This center will serve as a hub for various activities and support, and is currently under construction.</li>
+                <li><strong>Marcil Pure Water Project:</strong> A new initiative focused on providing clean and accessible water to communities living in remote areas.</li>
+            </ul>
+
+            <p>If you wish to support us with the projects and make tithes, offerings, or other donations, please mail checks to:</p>
+            <address>
+                Church Name<br />
+                Bank Name<br />
+                Bank Address<br />
+            </address>
+        </div>
+    </section>   
+    <!-- Location Section (Replacing the Contact Section) -->
+    <section id="location" class="location-section py-5">
+        <div class="container text-center">
+            <h2 class="section-title mb-4">Our Location</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Visit Us At</h4>
+                    <p>Gerji Korean hospital venue, Addis Ababa, Ethiopia</p>
+                    <p>Phone: +123 456 7890</p>
+                    <p>Email: info@yourwebsite.com</p>
+                    <div class="d-flex justify-content-center">
+                        <a href="https://web.facebook.com/tvmarsil" target="_blank">Facebook                            
+                        </a>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+                    <!-- Google Maps Embed -->
+                    <iframe src=""
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 Marcil Church || All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle (with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Function to handle section fade-in effect on scroll
+        const sections = document.querySelectorAll('section');
+        const revealSection = () => {
+            const windowHeight = window.innerHeight;
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < windowHeight - 150) {
+                    section.classList.add('visible');
+                }
+            });
+        };
+
+        // Listen for scroll events to trigger fade-in effect
+        window.addEventListener('scroll', revealSection);
+
+        // Initial check on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            revealSection();
+        });
+
+        // Light/Dark Mode Toggle Functionality
+        const themeToggleButton = document.querySelector('#theme-toggle');
+
+        if (themeToggleButton) {
+            themeToggleButton.addEventListener('click', () => {
+                const currentTheme = document.body.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.body.setAttribute('data-theme', 'light');
+                } else {
+                    document.body.setAttribute('data-theme', 'dark');
+                }
+            });
+        }
+
+        // Smooth Scroll to Anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Hover Effects on Cards and Images
+        const hoverElements = document.querySelectorAll('.card-img-top, .get-together-section img');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseover', () => {
+                el.style.transform = "scale(1.1)";
+                el.style.transition = "transform 0.3s ease, box-shadow 0.3s ease";
+            });
+            el.addEventListener('mouseout', () => {
+                el.style.transform = "scale(1)";
+                el.style.transition = "transform 0.3s ease, box-shadow 0.3s ease";
+            });
+        });
+
+        // Smooth scroll to location section when clicking a link
+        document.querySelector('#location-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector('#location').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+    </script>
+</body>
+
+</html>
