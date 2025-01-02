@@ -1,0 +1,24 @@
+
+ CREDITS
+------------------------------------------
+
+    - Bootstrap 4              -    https://getbootstrap.com
+
+    - Font Awesome             -    https://fontawesome.com
+
+    - jQuery Countdown         -    https://github.com/kemar/jquery.countdown
+
+    - jQuery Circle Progress   -    http://kottenator.github.io/jquery-circle-progress/
+
+    - Smooth scroll            -    https://github.com/cferdinandi/smooth-scroll
+
+    - Owl Carousel 2           -    https://owlcarousel2.github.io/OwlCarousel2/
+
+
+
+ IMAGES
+------------------------------------------
+
+    - All images credits go to https://www.pexels.com
+
+    - Logos & Illustrations  -  https://www.freepik.com
